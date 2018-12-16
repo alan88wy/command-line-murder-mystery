@@ -1,0 +1,82 @@
+cd mystery
+grewp "CLUE" crimescene
+cat ../hint1
+cat ../hint2
+grep 'Annabel' people
+
+Annabel Sun	F	26	Hart Place, line 40
+Oluwasegun Annabel	M	37	Mattapan Street, line 173
+Annabel Church	F	38	Buckingham Place, line 179
+Annabel Fuglsang	M	40	Haley Street, line 176
+
+grep 'Annabel' vehicles
+
+Owner: Oluwasegun Annabel
+Owner: Annabel Church
+Owner: Annabel Sun
+Owner: Annabel Fuglsang
+
+cat streets/Hart_Place| grep INTERVIEW                            15:46:04
+   SEE INTERVIEW #47246024
+cat interviews/interview-47246024                                 15:46:34
+   Ms. Sun has brown hair and is not from New Zealand.  Not the witness from the cafe
+
+cat cat streets/Buckingham_Place | grep INTERVIEW
+    SEE INTERVIEW #699607
+cat interviews/interview-699607
+
+    Interviewed Ms. Church at 2:04 pm.  Witness stated that she did not see anyone she could identify as the shooter, that she ran away as soon as the shots were fired.
+
+    However, she reports seeing the car that fled the scene.  Describes it as a blue Honda, with a license plate that starts with "L337" and ends with "9"   
+
+
+cat streets/Mattapan_Street| grep INTERVIEW
+cat interviews/interview-9437737                                  15:45:42
+    Doesn't appear to be the witness from the cafe, who is female.%
+
+cat streets/Haley_Street | grep INTERVIEW
+   SEE INTERVIEW #871877
+cat interviews/interview-871877                                   15:48:54
+Mr. Fuglsang is male and has brown hair.  Not the witness from the cafe`
+
+Only witness: Annabel Church
+Clue: vehicle Blue Honda, License Plate starts with L337 ends with "9"
+
+head -n 15 vehicles
+grep -A 5 "L337" vehicles| grep -A5 -B1 Honda | grep -A5 -B2 Blue | grep -A5 -B4 "6'"
+
+   L337QE9 Honda Blue Erika Owens 6'5"
+   L337DV9 Honda Blue Joe Germuska 6'2"
+   L3375A9 Honda Blue Jeremy Bowers 6'1"
+   L337WR9 Honda Blue Jacqui Maher 6'2"
+
+Check if they are male or female:
+grep Erika people
+   female - not suspect
+grep "Joe Germuska" people
+   male - potential suspect 
+grep "Jeremy Bowers" people
+   male - potential suspect
+grep "Jacqui Maher" people
+   female - not suspect
+
+   L337DV9 Honda Blue Joe Germuska 6'2"
+   L3375A9 Honda Blue Jeremy Bowers 6'1"
+
+grep  "Joe Germuska" membership/AAA
+    yes
+grep "Jeremy Bowers" memberships/AAA
+    yes
+
+grep "Jeremy Bowers" memberships/Delta_SkyMiles
+    yes
+
+L3375A9 Honda Blue Jeremy Bowers 6'1"
+
+grep "Jeremy Bowers" memberships/library.txt
+   yes
+
+grep "Jeremy Bowers" memberships/Museum_of_Bash_History
+   yes
+
+Suspect: Jeremy Bowers
